@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: TrabajoFinal.aux
+The style file: apa.bst
+Database file #1: TrabajoFinal.bib
+Warning--there's a number but no volume in mendez2016diseno
+You've used 3 entries,
+            1940 wiz_defined-function locations,
+            490 strings with 4283 characters,
+and the built_in function-call counts, 1168 in all, are:
+= -- 114
+> -- 54
+< -- 2
++ -- 18
+- -- 18
+* -- 108
+:= -- 211
+add.period$ -- 8
+call.type$ -- 3
+change.case$ -- 24
+chr.to.int$ -- 3
+cite$ -- 4
+duplicate$ -- 38
+empty$ -- 72
+format.name$ -- 25
+if$ -- 216
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 2
+newline$ -- 17
+num.names$ -- 9
+pop$ -- 18
+preamble$ -- 1
+purify$ -- 24
+quote$ -- 0
+skip$ -- 29
+stack$ -- 0
+substring$ -- 77
+swap$ -- 5
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 18
+warning$ -- 1
+while$ -- 10
+width$ -- 0
+write$ -- 38
+(There was 1 warning)

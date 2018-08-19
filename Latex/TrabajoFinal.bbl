@@ -1,0 +1,20 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\astroncite{Gestal et~al.}{2010}]{gestal2010introduccion}
+Gestal, M., Rivero, D., Rabu{\~n}al, J.~R., Dorado, J., and Pazos, A. (2010).
+\newblock Introducci{\'o}n a los algoritmos gen{\'e}ticos y la programaci{\'o}n
+  gen{\'e}tica.
+\newblock {\em A Coru{\~n}a}, 2010:30--68.
+
+\bibitem[\protect\astroncite{Jos{\'e} and Saletan}{2000}]{jose2000classical}
+Jos{\'e}, J. and Saletan, E. (2000).
+\newblock Classical dynamics: a contemporary approach.
+
+\bibitem[\protect\astroncite{M{\'e}ndez~Hincapi{\'e} and
+  Monroy~Ca{\~n}{\'o}n}{2016}]{mendez2016diseno}
+M{\'e}ndez~Hincapi{\'e}, N.~F. and Monroy~Ca{\~n}{\'o}n, I.~A. (2016).
+\newblock Dise{\~n}o de un programa en python para la ense{\~n}anza de la
+  transferencia de {\'o}rbita de hohmann.
+\newblock {\em Tecn{\'e}, Episteme y Didaxis: TED}, (39):81--102.
+
+\end{thebibliography}

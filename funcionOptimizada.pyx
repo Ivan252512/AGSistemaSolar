@@ -13,7 +13,7 @@ sca = np.sin(np.pi/2+ANG)
 cca = np.cos(np.pi/2+ANG)
 
 #Diferencial a usar
-dt=0.00000190258 #1 min
+dt=0.00000190258 * 6 # 10 min
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -155,7 +155,7 @@ destino = Mars #Destino, se puede cambiar a cualquier planeta o Satélite.
 def f(vx,vy,inicio):
     global movBody, dt, Msol, Earth, destino, UAkm, Luna
 
-    tiempoLimite = 365*24*60 #Número máximo de iteraciones.
+    tiempoLimite = 365*24*6 #Número máximo de iteraciones, 1 año.
     tiempo = 0
     tiempoEnOrbita = 0
 
@@ -199,7 +199,7 @@ def f(vx,vy,inicio):
                 #Condicion para beneficiar a las trayectorías que ponen en
                 #orbita a la nave sobre el destino.
                 if (np.linalg.norm(Ship.pos-destino.pos) <
-                   (destino.radius/Luna.radius)*15*destino.radius):
+                   (destino.radius/Luna.radius)*15*destino.radius/UAkm):
                    tiempoEnOrbita += 1
 
                 #Si la distancia nave-destino es menor que 0.05 UA, se sale del
