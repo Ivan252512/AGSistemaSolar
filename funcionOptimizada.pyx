@@ -13,7 +13,7 @@ sca = np.sin(np.pi/2+ANG)
 cca = np.cos(np.pi/2+ANG)
 
 #Diferencial a usar
-dt=0.00000190258 * 6 # 10 min
+dt=0.00001902587 # 10 min
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -155,7 +155,7 @@ destino = Mars #Destino, se puede cambiar a cualquier planeta o Satélite.
 def f(vx,vy,inicio):
     global movBody, dt, Msol, Earth, destino, UAkm, Luna
 
-    tiempoLimite = 365*24*6 #Número máximo de iteraciones, 1 año.
+    tiempoLimite = 365*24*6 / 3 #Número máximo de iteraciones, 4 meses.
     tiempo = 0
     tiempoEnOrbita = 0
 
@@ -181,7 +181,7 @@ def f(vx,vy,inicio):
             #Primer distancia Nave-destino, se usa abajo, se le resta un poco a
             #conveniencia, para lograr que las trayectorias se encaminen al
             #destino.
-            distOriginal=np.linalg.norm(Ship.pos-destino.pos)-0.01
+            distOriginal=np.linalg.norm(Ship.pos-destino.pos)-0.05
         #Movemos cada uno de los cuerpos en el sistema.
 
         co = 0
@@ -199,7 +199,7 @@ def f(vx,vy,inicio):
                 #Condicion para beneficiar a las trayectorías que ponen en
                 #orbita a la nave sobre el destino.
                 if (np.linalg.norm(Ship.pos-destino.pos) <
-                   (destino.radius/Luna.radius)*15*destino.radius/UAkm):
+                   (destino.radius/Luna.radius)*10*destino.radius/UAkm):
                    tiempoEnOrbita += 1
 
                 #Si la distancia nave-destino es menor que 0.05 UA, se sale del
@@ -207,9 +207,9 @@ def f(vx,vy,inicio):
                 if(np.linalg.norm(Ship.pos-
                                   destino.pos)==destino.radius+Ship.radius):
                     print(vx,vy,inicio,
-                          np.linalg.norm(Ship.pos-destino.pos)/10 +
+                          np.linalg.norm(Ship.pos-destino.pos) +
                                         (tiempo/100-tiempoEnOrbita)/tiempoLimite)
-                    return (np.linalg.norm(Ship.pos-destino.pos)/10 +
+                    return (np.linalg.norm(Ship.pos-destino.pos) +
                            (tiempo/100-tiempoEnOrbita)/tiempoLimite)
 
                 #Si la nave se acerca mucho al Sol, se sale del while y regresa
@@ -236,14 +236,13 @@ def f(vx,vy,inicio):
     #que la distancia original(Tierra-destino), de la cual sale la nave
     if  posiciones[0]<distOriginal:
         print(vx,vy,inicio,
-              np.linalg.norm(Ship.pos-destino.pos)/10 +
-                             (tiempo/100-tiempoEnOrbita)/tiempoLimite)
-        return posiciones[0]/10 + (tiempo/10-tiempoEnOrbita)/tiempoLimite
+               posiciones[0] + (tiempo/100-tiempoEnOrbita)/tiempoLimite)
+        return posiciones[0] + (tiempo/100-tiempoEnOrbita)/tiempoLimite
 
     print(vx,vy,inicio,
-          np.linalg.norm(Ship.pos-destino.pos)/10 +
+          np.linalg.norm(Ship.pos-destino.pos) +
                         (tiempo/100-tiempoEnOrbita)/tiempoLimite)
-    return (np.linalg.norm(Ship.pos-destino.pos)/10 +
+    return (np.linalg.norm(Ship.pos-destino.pos) +
            (tiempo/100-tiempoEnOrbita)/tiempoLimite)
 
 

@@ -14,7 +14,7 @@ dospi=2*pi
 pimedios=pi/2
 
 #Diferencial a usar
-dt=0.00000190258 * 6 # 10 min
+dt=0.00001902587# 10 min
 
 """Mercurio"""
 rmerc=0.38          #radio
