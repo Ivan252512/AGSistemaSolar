@@ -155,7 +155,7 @@ destino = Mars #Destino, se puede cambiar a cualquier planeta o Satélite.
 def f(vx,vy,inicio):
     global movBody, dt, Msol, Earth, destino, UAkm, Luna
 
-    tiempoLimite = 365*24*6 / 3 #Número máximo de iteraciones, 4 meses.
+    tiempoLimite = 365*24*6 #Número máximo de iteraciones, 12 meses.
     tiempo = 0
     tiempoEnOrbita = 0
 
@@ -198,8 +198,7 @@ def f(vx,vy,inicio):
 
                 #Condicion para beneficiar a las trayectorías que ponen en
                 #orbita a la nave sobre el destino.
-                if (np.linalg.norm(Ship.pos-destino.pos) <
-                   (destino.radius/Luna.radius)*10*destino.radius/UAkm):
+                if np.linalg.norm(Ship.pos-destino.pos)<destino.radius*10/UAkm:
                    tiempoEnOrbita += 1
 
                 #Si la distancia nave-destino es menor que 0.05 UA, se sale del
