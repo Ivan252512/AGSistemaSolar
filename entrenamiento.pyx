@@ -20,13 +20,13 @@ regresa"""
 UAkm = 1.496e+8 #km
 
 vMaxCohete = (60000/UAkm)*(24*365) #Covertimos km/hr a UA/AÑO
-destinoString = "OrbitaTierra"
+destinoString = "Tierra"
 
-optimo=ag.evolucion(-vMaxCohete, vMaxCohete, 0, ag.poblacion(250,20),
-                    ag.poblacion(250,20), ag.poblacion(250,20), 30)
+optimo=ag.evolucion(-vMaxCohete, vMaxCohete, ag.poblacion(50,20),
+                    ag.poblacion(50,20), 20)
 print(optimo)
 #Guardamos en un .txt
-optimos=open('noop/'+OrbitaTierra'+.txt', 'w')
+optimos=open('noop/'+destinoString+'.txt', 'w')
 for i in optimo:
     optimos.write(str(i)+'\n' )
 optimos.close()

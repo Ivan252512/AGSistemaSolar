@@ -14,7 +14,7 @@ dospi=2*pi
 pimedios=pi/2
 
 #Diferencial a usar
-dt=0.00001902587# 10 min
+dt=0.000001902587# 1 min
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -192,9 +192,9 @@ movBody = ([Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
 destino = Luna
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
-def f(vx,vy,inicio):
+def f(vx,vy,iteraciones):
     global movBody, dt
-    print(vx,vy,inicio)
+    print(vx,vy,iteraciones)
 
     #Herramientas de visual python para la visualización
     scene.width = 1400
@@ -207,23 +207,19 @@ def f(vx,vy,inicio):
     ccel = [Sun,Mercury,Venus,Earth,Mars,Jupyter,Saturn,Uranus,Neptune]
     #Primer distancia Nave-destino, se usa abajo, se le resta un poco a
     #conveniencia, para lograr que las trayectorias se encaminen al destino.
-    while True:
 
-        #Rapidez a la que se quiere visualizar cada iteración, no necesario.
-        #Tiempo inicial del viaje de la nave, es decir, la nave puede iniciar
-        #su trayectoria mucho después de que se inicie la simulación.
-        #Movemos cada uno de los cuerpos en el sistema.
-        if tiempo==inicio:
-            #cambiamos la posición inicial de la nave a la actual de la Tierra.
-            Ship = sphere(pos=Earth.pos+vector(0,Earth.radius,0),
-                          radius=0.1/UAkm,
-                          color=color.orange,make_trail=True, interval=10)
-            Ship.mass = 546700/Msol
-            Ship.v = Earth.v + vector(vx, vy, 0.0)
-            movBody.append(Ship)
-            ccel.append(Ship)
-        if tiempo>=inicio:
-           scene.center = Ship.pos
+    #cambiamos la posición inicial de la nave a la actual de la Tierra.
+    Ship = sphere(pos=Earth.pos+vector(0,Earth.radius,0),
+                  radius=0.1/UAkm,
+                  color=color.orange,make_trail=True, interval=10)
+    Ship.mass = 546700/Msol
+    Ship.v = Earth.v + vector(vx, vy, 0.0)
+    movBody.append(Ship)
+    ccel.append(Ship)
+
+    while True:
+        rate(50)
+        scene.center = Ship.pos
         #Función para mover todos los cuerpos
         computeForces(movBody)
         if contimp==1000:
