@@ -189,6 +189,8 @@ Neptune.v = vector(vnep*cca, vnep*sca, 0)
 movBody = ([Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune])
 
+destino = Luna
+
 """Es la función principal, descripción en el archivo .pdf adjunto"""
 def f(vx,vy,inicio):
     global movBody, dt
@@ -206,6 +208,7 @@ def f(vx,vy,inicio):
     #Primer distancia Nave-destino, se usa abajo, se le resta un poco a
     #conveniencia, para lograr que las trayectorias se encaminen al destino.
     while True:
+
         #Rapidez a la que se quiere visualizar cada iteración, no necesario.
         #Tiempo inicial del viaje de la nave, es decir, la nave puede iniciar
         #su trayectoria mucho después de que se inicie la simulación.
@@ -219,15 +222,10 @@ def f(vx,vy,inicio):
             Ship.v = Earth.v + vector(vx, vy, 0.0)
             movBody.append(Ship)
             ccel.append(Ship)
+        if tiempo>=inicio:
+           scene.center = Ship.pos
         #Función para mover todos los cuerpos
         computeForces(movBody)
-        centrar = []
-        j=0
-        for body in ccel:
-                centrar.append([mag(body.pos-scene.mouse.pos),j])
-                j+=1
-        centrar.sort()
-        scene.center = ccel[centrar[0][1]].pos
         if contimp==1000:
             print(tiempo)
             contimp=0
@@ -235,10 +233,14 @@ def f(vx,vy,inicio):
         tiempo+=1
         contimp+=1
 
+        if(mag(Ship.pos-destino.pos)<=destino.radius*5):
+            break
+
 
 """Mover cuerpos"""
-global SaturnRing, dt, Saturn, Earth
+
 def computeForces(cuerpos):
+    global SaturnRing, dt, Saturn, Earth
     cont=0
     for body in cuerpos:
 

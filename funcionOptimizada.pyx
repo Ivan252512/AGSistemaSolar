@@ -149,13 +149,13 @@ Neptune = cc.celestialBody(mnep, 0.1, np.array([rnep*ca,rnep*sa,0]),
 movBody = [Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune]
 
-destino = Mars #Destino, se puede cambiar a cualquier planeta o Satélite.
+destino = Luna #Destino, se puede cambiar a cualquier planeta o Satélite.
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
 def f(vx,vy,inicio):
     global movBody, dt, Msol, Earth, destino, UAkm, Luna
 
-    tiempoLimite = 365*24*6 #Número máximo de iteraciones, 12 meses.
+    tiempoLimite = 365*24*6 / (12 * 4) #Número máximo de iteraciones, 1 mes.
     tiempo = 0
     tiempoEnOrbita = 0
 
@@ -181,7 +181,7 @@ def f(vx,vy,inicio):
             #Primer distancia Nave-destino, se usa abajo, se le resta un poco a
             #conveniencia, para lograr que las trayectorias se encaminen al
             #destino.
-            distOriginal=np.linalg.norm(Ship.pos-destino.pos)-0.05
+            distOriginal=np.linalg.norm(Ship.pos-destino.pos)-0.1
         #Movemos cada uno de los cuerpos en el sistema.
 
         co = 0
@@ -198,13 +198,13 @@ def f(vx,vy,inicio):
 
                 #Condicion para beneficiar a las trayectorías que ponen en
                 #orbita a la nave sobre el destino.
-                if np.linalg.norm(Ship.pos-destino.pos)<destino.radius*10/UAkm:
-                   tiempoEnOrbita += 1
+                if np.linalg.norm(Ship.pos-destino.pos)<=destino.radius*15:
+                   tiempoEnOrbita += 10
 
-                #Si la distancia nave-destino es menor que 0.05 UA, se sale del
+                #Si la distancia nave-destino es menor que 0.005 UA, se sale del
                 #while y regresa el valor más cercano.
                 if(np.linalg.norm(Ship.pos-
-                                  destino.pos)==destino.radius+Ship.radius):
+                                  destino.pos)<=destino.radius*5):
                     print(vx,vy,inicio,
                           np.linalg.norm(Ship.pos-destino.pos) +
                                         (tiempo/100-tiempoEnOrbita)/tiempoLimite)
