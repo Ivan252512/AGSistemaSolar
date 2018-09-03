@@ -14,7 +14,7 @@ dospi=2*pi
 pimedios=pi/2
 
 #Diferencial a usar
-dt=0.000001902587# 1 min
+dt=0.0001902587# 1 min
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -115,15 +115,15 @@ Sun = sphere(pos=vector(0,0,0),
 Sun.mass = 1
 Sun.v = vector(0, 0, 0)
 
-Earth = sphere(pos=vector(rearth*ca,rearth*sa,0),
+Earth = sphere(pos=vector(rearth*cos(0),rearth*sin(0),0),
                radius=6371/UAkm, color=color.blue,make_trail=True, interval=10)
 Earth.mass = mearth
-Earth.v = vector(vearth*cca, vearth*sca, 0)
+Earth.v = vector(vearth*cos(pimedios), vearth*sin(pimedios), 0)
 
-Luna = sphere(pos=vector(rluna*ca,rluna*sa,0),
+Luna = sphere(pos=vector(rluna*cos(0),rluna*sin(0),0),
                radius=1737/UAkm, color=color.white,make_trail=True, interval=10)
 Luna.mass = mluna
-Luna.v = vector(vluna*cca, vluna*sca, 0)
+Luna.v = vector(vluna*cos(pimedios), vluna*sin(pimedios), 0)
 
 Mercury = sphere(pos=vector(rmerc*ca,rmerc*sa,0),
                  radius=2440/UAkm, color=color.orange,make_trail=True, interval=10)

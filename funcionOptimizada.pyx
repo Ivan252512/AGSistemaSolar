@@ -11,9 +11,13 @@ sa = np.sin(ANG)
 ca = np.cos(ANG)
 sca = np.sin(np.pi/2+ANG)
 cca = np.cos(np.pi/2+ANG)
+sat = np.sin(0)
+cat = np.cos(0)
+scat = np.sin(np.pi/2)
+ccat = np.cos(np.pi/2)
 
 #Diferencial a usar
-dt=0.000001902587 # 1 min
+dt=0.0001902587 # 100 min
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -110,11 +114,11 @@ Mercury = cc.celestialBody(mmerc, 2440/UAkm, np.array([rmerc*ca, rmerc*sa,0]),
 Venus = cc.celestialBody(mvenus, 6052/UAkm, np.array([rvenus*ca,rvenus*sa,0]),
                         np.array([vvenus*cca, vvenus*sca, 0]))
 
-Luna = cc.celestialBody(mluna, 1737/UAkm, np.array([rluna*ca,rluna*sa,0]),
-                        np.array([vluna*cca, vluna*sca, 0]))
+Luna = cc.celestialBody(mluna, 1737/UAkm, np.array([rluna*cat,rluna*sat,0]),
+                        np.array([vluna*ccat, vluna*scat, 0]))
 
-Earth = cc.celestialBody(mearth, 6371/UAkm, np.array([rearth*ca,rearth*sa,0.0]),
-                         np.array([vearth*cca,vearth*sca,0.0]))
+Earth = cc.celestialBody(mearth, 6371/UAkm, np.array([rearth*cat,rearth*sat,0.0]),
+                         np.array([vearth*ccat,vearth*scat,0.0]))
 
 Mars = cc.celestialBody(mmarte, 3390/UAkm, np.array([rmarte*ca,rmarte*sa,0]),
                         np.array([vmarte*cca, vmarte*sca, 0]))
@@ -131,32 +135,32 @@ Ganimedes = cc.celestialBody(mgan, 2634/UAkm, np.array([rgan*ca,rgan*sa,0]),
 Calisto = cc.celestialBody(mcal, 2410/UAkm, np.array([rcal*ca,rcal*sa,0]),
                         np.array([vcal*cca, vcal*sca, 0]))
 
-Jupyter = cc.celestialBody(mjup, 0.1, np.array([rjup*ca,rjup*sa,0]),
+Jupyter = cc.celestialBody(mjup, 71492/UAkm, np.array([rjup*ca,rjup*sa,0]),
                         np.array([vjup*cca, vjup*sca, 0]))
 
-Titan = cc.celestialBody(mtit, 0.1, np.array([rtit*ca,rtit*sa,0]),
+Titan = cc.celestialBody(mtit, 2575/UAkm, np.array([rtit*ca,rtit*sa,0]),
                         np.array([vtit*cca, vtit*sca, 0]))
 
-Saturn = cc.celestialBody(msat, 0.1, np.array([rsat*ca,rsat*sa,0]),
+Saturn = cc.celestialBody(msat, 58232/UAkm, np.array([rsat*ca,rsat*sa,0]),
                         np.array([vsat*cca, vsat*sca, 0]))
 
-Uranus = cc.celestialBody(mur, 0.1, np.array([rur*ca,rur*sa,0]),
+Uranus = cc.celestialBody(mur, 25362/UAkm, np.array([rur*ca,rur*sa,0]),
                             np.array([vur*cca, vur*sca, 0]))
 
-Neptune = cc.celestialBody(mnep, 0.1, np.array([rnep*ca,rnep*sa,0]),
+Neptune = cc.celestialBody(mnep, 24622/UAkm, np.array([rnep*ca,rnep*sa,0]),
                         np.array([vnep*cca, vnep*sca, 0]))
 
 movBody = [Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune]
 
-destino = Earth #Destino, se puede cambiar a cualquier planeta o Satélite.
+destino = Mars #Destino, se puede cambiar a cualquier planeta o Satélite.
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
 def f(vx,vy,iteraciones):
     global movBody, dt, Msol, Earth, destino, UAkm, Luna
 
     iteraciones = iteraciones + 1
-    tiempoLimite = 365*24*60 / (150) #Número máximo de iteraciones, 6 meses.
+    tiempoLimite = 365*24*0.6 #Número máximo de iteraciones, 1 año.
     tiempo = 0
     tiempoEnOrbita = 0
 

@@ -13,7 +13,7 @@ from funcion import f
 """Evaluación para las mejores trayectorias en el .txt"""
 
 #Cargamos desde el archivo txt
-file=open('Luna.txt', 'r')
+file=open('Marte.txt', 'r')
 trayectorias=[]
 linea=''
 for i in file.read():
