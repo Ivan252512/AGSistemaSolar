@@ -14,7 +14,7 @@ dospi=2*pi
 pimedios=pi/2
 
 #Diferencial a usar
-dt=0.00001902587# 10 min
+dt=0.00000190781 # 1 min
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -193,7 +193,7 @@ Neptune.v = vector(vnep*cca, vnep*sca, 0)
 movBody = ([Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune])
 
-destino = Luna
+destino = Mars
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
 def f(vx,vy,iteraciones):

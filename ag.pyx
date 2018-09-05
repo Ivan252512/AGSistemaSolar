@@ -95,7 +95,8 @@ def evolucion(a,b,individuosx,individuosy,iteraciones):
     evaluacion.sort()
 
     for i in evaluacion:
-        resultado.append([i[0] + np.log10(iteraciones + 1), i[1],i[2],i[3]])
+        resultado.append([i[0] + np.log10(np.sqrt(iteraciones + 1)),
+                          i[1],i[2],i[3]])
 
     mejores50=evaluacion[:int(0.5*len(evaluacion))]
     #Reproducción
