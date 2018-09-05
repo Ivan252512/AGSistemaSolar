@@ -11,9 +11,13 @@ sa = np.sin(ANG)
 ca = np.cos(ANG)
 sca = np.sin(np.pi/2+ANG)
 cca = np.cos(np.pi/2+ANG)
+sat = np.sin(0)
+cat = np.cos(0)
+scat = np.sin(np.pi/2)
+ccat = np.cos(np.pi/2)
 
 #Diferencial a usar
-dt=0.0001902587 # 100 min
+dt=0.00001902587 # 10 min
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -149,28 +153,14 @@ Neptune = cc.celestialBody(mnep, 24622/UAkm, np.array([rnep*ca,rnep*sa,0]),
 movBody = [Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune]
 
+destino = Mars #Destino, se puede cambiar a cualquier planeta o Satélite.
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
-def f(vx,vy,angulo,anguloNave,iteraciones):
-    global movBody, dt, Msol, UAkm, rearth, mearth, vearth, wearth, rluna
-    global mluna, vluna, wluna
-
-    sat = np.sin(np.pi*angulo)
-    sat = np.cos(np.pi*angulo)
-    sca = np.sin(np.pi*(0.5 + angulo))
-    cca = np.cos(np.pi*(0.5 + angulo))
-
-    Luna = cc.celestialBody(mluna, 1737/UAkm, np.array([rluna*cat,rluna*sat,0]),
-                            np.array([vluna*ccat, vluna*scat, 0]))
-
-    Earth = cc.celestialBody(mearth, 6371/UAkm,
-                             np.array([rearth*cat,rearth*sat,0.0]),
-                             np.array([vearth*ccat,vearth*scat,0.0]))
-
-    destino = Mars #Destino, se puede cambiar a cualquier planeta o Satélite.
+def f(vx,vy,iteraciones):
+    global movBody, dt, Msol, Earth, destino, UAkm, Luna
 
     iteraciones = iteraciones + 1
-    tiempoLimite = 10000 #Número máximo de iteraciones, 1 año.
+    tiempoLimite = 365*24*6/2 #Número máximo de iteraciones, 6 meses.
     tiempo = 0
     tiempoEnOrbita = 0
 
@@ -185,8 +175,7 @@ def f(vx,vy,angulo,anguloNave,iteraciones):
 
     #cambiamos la posición inicial de la nave a la actual de la Tierra.
     Ship = cc.celestialBody(546700/Msol, 0.0001/UAkm,
-           Earth.pos+np.array([Earth.radius*np.cos(np.pi*anguloNave),
-                               Earth.radius,0.0]),
+           Earth.pos+np.array([0.0,Earth.radius,0.0]),
            Earth.vel+np.array([vx, vy, 0.0]))
     movBody.append(Ship)
     #Primer distancia Nave-destino, se usa abajo, se le resta un poco a

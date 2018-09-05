@@ -22,8 +22,8 @@ UAkm = 1.496e+8 #km
 vMaxCohete = (60000/UAkm)*(24*365) #Covertimos km/hr a UA/AÑO
 destinoString = "Marte"
 
-optimo=ag.evolucion(-vMaxCohete, vMaxCohete, ag.poblacion(10,16),
-                    ag.poblacion(10,16), 10)
+optimo=ag.evolucion(-vMaxCohete, vMaxCohete, ag.poblacion(20,16),
+                    ag.poblacion(20,16), 20)
 print(optimo)
 #Guardamos en un .txt
 optimos=open('noop/'+destinoString+'.txt', 'w')

@@ -2,6 +2,7 @@ import numpy as np
 
 """Clase para crear cuerpos celestes"""
 class celestialBody:
+
     """Constructor"""
     def __init__(self, mass, radius, pos, vel):
         if (isinstance(mass, float) and isinstance(radius, float) and
