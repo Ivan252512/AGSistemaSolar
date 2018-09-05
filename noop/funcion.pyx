@@ -210,7 +210,7 @@ def f(vx,vy,iteraciones):
 
     #cambiamos la posición inicial de la nave a la actual de la Tierra.
     Ship = sphere(pos=Earth.pos+vector(0,Earth.radius,0),
-                  radius=0.1/UAkm,
+                  radius=0.0001/UAkm,
                   color=color.orange,make_trail=True, interval=10)
     Ship.mass = 546700/Msol
     Ship.v = Earth.v + vector(vx, vy, 0.0)
@@ -228,7 +228,6 @@ def f(vx,vy,iteraciones):
         #Hacemos una lista con todas las distancias Nave-Destino.
         tiempo+=1
         contimp+=1
-
         if(mag(Ship.pos-destino.pos)<=destino.radius*5):
             break
 

@@ -45,12 +45,14 @@ def cruza(bin1,bin2):
 """Función de mutación, cambia aleatoriamente el valor de un gen"""
 
 def mutacion(bin):
-    rand=random.randint(0,len(bin)-1)
-    if(bin[rand]=="0"):
-        bin[rand]="1"
-    if(bin[rand]=="1"):
-        bin[rand]="0"
-    return bin
+    bin = list(bin)
+    for i in range(int(len(bin)/random.randint(1,5))):
+        rand=random.randint(0,len(bin)-1)
+        if(bin[rand]=="0"):
+            bin[rand]="1"
+        if(bin[rand]=="1"):
+            bin[rand]="0"
+    return "".join(bin)
 
 """Crea una población de individuos"""
 def poblacion(cantidad,bitsDeCadaIndividuo):
@@ -93,27 +95,33 @@ def evolucion(a,b,individuosx,individuosy,iteraciones):
     evaluacion.sort()
 
     for i in evaluacion:
-        resultado.append([i[0] + iteraciones/10, i[1],i[2],i[3]])
+        resultado.append([i[0] + np.log10(iteraciones + 1), i[1],i[2],i[3]])
 
     mejores50=evaluacion[:int(0.5*len(evaluacion))]
     #Reproducción
     hijos=[]
     mejores50bin=[]
+
+
     for i in range(len(mejores50)):
         mejores50bin.append([mejores50[i][1],mejores50[i][2]])
-        hijos.append([cruza(mejores50[random.randint(0,len(mejores50)-1)][1],
-                            mejores50[random.randint(0,len(mejores50)-1)][1]),
-                      cruza(mejores50[random.randint(0,len(mejores50)-1)][2],
-                            mejores50[random.randint(0,len(mejores50)-1)][2])])
-    #Mutación, solo los hijos mutan, escogemos el 10% al azar, 5 veces.
-    for i in range(int(len(hijos)*0.4)):
-        for i in range(len(hijos[0])/4):
-            randx=random.randint(0,len(hijos)-1)
-            hijos[randx][0]=mutacion(hijos[randx][0])
-            randy=random.randint(0,len(hijos)-1)
-            hijos[randy][1]=mutacion(hijos[randy][1])
+        hijos.append([cruza(mejores50[random.randint(0,int(len(mejores50)/4)-1)][1],
+                            mejores50[random.randint(0,int(len(mejores50)/4)-1)][1]),
+                      cruza(mejores50[random.randint(0,int(len(mejores50)/4)-1)][2],
+                            mejores50[random.randint(0,int(len(mejores50)/4)-1)][2])])
+
+    #Mutación, solo los hijos mutan.
+    for i in range(int(len(hijos)/random.randint(1,4))):
+        randx=random.randint(0,len(hijos)-1)
+        hijos[randx][0]=mutacion(hijos[randx][0])
+        randy=random.randint(0,len(hijos)-1)
+        hijos[randy][1]=mutacion(hijos[randy][1])
+
+
     #Junta a los padres y a los hijos
-    nuevaGeneracion=mejores50bin+hijos
+    nuevaGeneracion=(mejores50bin[:len(mejores50bin)/2]+
+                     mejores50bin[:len(mejores50bin)-len(mejores50bin)/2]+
+                     hijos)
     genx=[]
     geny=[]
     for i in range(len(nuevaGeneracion)):
