@@ -245,7 +245,7 @@ def computeForces(cuerpos):
 
         #Condición para que la nave no atraviese planetas.
 
-        if cont==15 and mag(Earth.pos-body.pos)<Earth.radius:
+        if cont==15 and mag(Earth.pos-body.pos)<Earth.radius*2:
             body.pos = Earth.pos + vector(0,Earth.radius,0)
 
         else:

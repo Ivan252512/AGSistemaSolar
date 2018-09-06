@@ -160,7 +160,7 @@ def f(vx,vy,iteraciones):
     global movBody, dt, Msol, Earth, destino, UAkm, Luna
 
     iteraciones = np.sqrt(iteraciones + 1)
-    tiempoLimite = 365*24*60/3 #Número máximo de iteraciones, 4 meses.
+    tiempoLimite = 365*24*60/2 #Número máximo de iteraciones, 6 meses.
     tiempo = 0
     tiempoEnOrbita = 0
 
