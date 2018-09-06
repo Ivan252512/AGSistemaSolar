@@ -193,7 +193,7 @@ Neptune.v = vector(vnep*cca, vnep*sca, 0)
 movBody = ([Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune])
 
-destino = Mars
+destino = Venus
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
 def f(vx,vy,iteraciones):
@@ -213,7 +213,7 @@ def f(vx,vy,iteraciones):
     #conveniencia, para lograr que las trayectorias se encaminen al destino.
 
     #cambiamos la posición inicial de la nave a la actual de la Tierra.
-    Ship = sphere(pos=Earth.pos+vector(0,Earth.radius,0),
+    Ship = sphere(pos=Earth.pos+vector(-Earth.radius*2,0.0,0),
                   radius=0.0001/UAkm,
                   color=color.orange,make_trail=True, interval=10)
     Ship.mass = 546700/Msol

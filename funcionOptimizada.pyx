@@ -153,7 +153,7 @@ Neptune = cc.celestialBody(mnep, 24622/UAkm, np.array([rnep*ca,rnep*sa,0]),
 movBody = [Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune]
 
-destino = Mars #Destino, se puede cambiar a cualquier planeta o Satélite.
+destino = Venus #Destino, se puede cambiar a cualquier planeta o Satélite.
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
 def f(vx,vy,iteraciones):
@@ -175,7 +175,7 @@ def f(vx,vy,iteraciones):
 
     #cambiamos la posición inicial de la nave a la actual de la Tierra.
     Ship = cc.celestialBody(5467000/Msol, 2/UAkm,
-           Earth.pos+np.array([0.0,Earth.radius,0.0]),
+           Earth.pos+np.array([-Earth.radius*2,0.0,0.0]),
            Earth.vel+np.array([vx, vy, 0.0]))
     movBody.append(Ship)
     #Primer distancia Nave-destino, se usa abajo, se le resta un poco a
@@ -191,8 +191,8 @@ def f(vx,vy,iteraciones):
         co = 0
         for body in movBody:
             #Aceleración del planeta
-            if co==15 and np.linalg.norm(Earth.pos-body.pos)<Earth.radius:
-                body.pos = Earth.pos + np.array([0,Earth.radius,0])
+            if co==15 and np.linalg.norm(Earth.pos-body.pos)<Earth.radius*2:
+                body.pos = Earth.pos + np.array([0,Earth.radius*2,0])
                 tiempoEnOrbita -= 2000
             else:
                 body.mov(acel(body.pos),dt)

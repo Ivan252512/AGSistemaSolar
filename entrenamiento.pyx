@@ -20,7 +20,7 @@ regresa"""
 UAkm = 1.496e+8 #km
 
 vMaxCohete = (60000/UAkm)*(24*365) #Covertimos km/hr a UA/AÑO
-destinoString = "Marte"
+destinoString = "Venus"
 
 optimo=ag.evolucion(-vMaxCohete, vMaxCohete, ag.poblacion(10,32),
                     ag.poblacion(10,32), 10)
