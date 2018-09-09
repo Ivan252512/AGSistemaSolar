@@ -19,11 +19,11 @@ regresa"""
 #Unidad astronómica en KM para convertir km/hr en UA/año
 UAkm = 1.496e+8 #km
 
-vMaxCohete = (60000/UAkm)*(24*365) #Covertimos km/hr a UA/AÑO
-destinoString = "Venus"
+vMaxCohete = (70000/UAkm)*(24*365) #Covertimos km/hr a UA/AÑO
+destinoString = "Luna"
 
-optimo=ag.evolucion(-vMaxCohete, vMaxCohete, ag.poblacion(10,32),
-                    ag.poblacion(10,32), 10)
+optimo=ag.evolucion(-vMaxCohete, vMaxCohete, ag.poblacion(20,32),
+                    ag.poblacion(20,32), 20)
 print(optimo)
 #Guardamos en un .txt
 optimos=open('noop/'+destinoString+'.txt', 'w')

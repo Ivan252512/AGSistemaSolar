@@ -14,7 +14,7 @@ dospi=2*pi
 pimedios=pi/2
 
 #Diferencial a usar
-dt=0.00000190781 # 1 min
+dt=0.000000190781 # 6 seg
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -108,10 +108,10 @@ sa = sin(ANG)
 ca = cos(ANG)
 sca = sin(pimedios+ANG)
 cca = cos(pimedios+ANG)
-sat = sin(3*pi/8)
-cat = cos(3*pi/8)
-scat = sin(pimedios+3*pi/8)
-ccat = cos(pimedios+3*pi/8)
+sat = sin(7*pi/8)
+cat = cos(7*pi/8)
+scat = sin(pimedios+7*pi/8)
+ccat = cos(pimedios+7*pi/8)
 
 #Generación de objetos a representar con su posición, masa y velocidad.
 Sun = sphere(pos=vector(0,0,0),
@@ -213,7 +213,7 @@ def f(vx,vy,iteraciones):
     #conveniencia, para lograr que las trayectorias se encaminen al destino.
 
     #cambiamos la posición inicial de la nave a la actual de la Tierra.
-    Ship = sphere(pos=Earth.pos+vector(-Earth.radius*2,0.0,0),
+    Ship = sphere(pos=Earth.pos+vector(0,Earth.radius*2,0),
                   radius=0.0001/UAkm,
                   color=color.orange,make_trail=True, interval=10)
     Ship.mass = 546700/Msol
@@ -222,7 +222,6 @@ def f(vx,vy,iteraciones):
     ccel.append(Ship)
 
     while True:
-        rate(50)
         scene.center = Ship.pos
         #Función para mover todos los cuerpos
         computeForces(movBody)
@@ -240,26 +239,16 @@ def f(vx,vy,iteraciones):
 
 def computeForces(cuerpos):
     global SaturnRing, dt, Saturn, Earth
-    cont=0
     for body in cuerpos:
 
-        #Condición para que la nave no atraviese planetas.
-
-        if cont==15 and mag(Earth.pos-body.pos)<Earth.radius*2:
-            body.pos = Earth.pos + vector(0,Earth.radius,0)
-
-        else:
-            #Aceleración del planeta
-            xarray = np.array([body.pos.x, body.pos.y, body.pos.z])
-            varray = np.array([body.v.x, body.v.y, body.v.z])
-            ximas1, vimas1 = eulerMethod(acel, xarray, varray, dt)
-            #de la velocidad y posición del planeta.
-            body.pos = vector(ximas1[0],ximas1[1],ximas1[2])
-            body.v = vector(vimas1[0],vimas1[1],vimas1[2])
-            SaturnRing.pos = Saturn.pos
-
-        cont+=1
-
+        #Aceleración del planeta
+        xarray = np.array([body.pos.x, body.pos.y, body.pos.z])
+        varray = np.array([body.v.x, body.v.y, body.v.z])
+        ximas1, vimas1 = eulerMethod(acel, xarray, varray, dt)
+        #de la velocidad y posición del planeta.
+        body.pos = vector(ximas1[0],ximas1[1],ximas1[2])
+        body.v = vector(vimas1[0],vimas1[1],vimas1[2])
+        SaturnRing.pos = Saturn.pos
 
 
 """Calcular aceleraciones para impedir divisiones entre cero"""
