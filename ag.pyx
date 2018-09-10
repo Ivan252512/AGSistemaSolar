@@ -80,18 +80,32 @@ def evolucion(a,b,t,individuosx,individuosy,individuost,iteraciones):
     #Selección
 
     aEvaluar = []
+    evaluacionRepetida = []
 
     for i in range(len(individuosx)):
-        aEvaluar.append([binToDec(individuosx[i],a,b),
-                         binToDec(individuosy[i],a,b),
-                         int(binToDec(individuost[i],0,t)),
-                         individuosx[i],
-                         individuosy[i],
-                         individuost[i],
-                         iteraciones])
+        contiene = False
+        for j in resultado:
+            if (j[1]==individuosx[i] and j[2]==individuosy[i] and
+                j[3]==individuost[i]):
+                evaluacionRepetida.append([j[0], j[1], j[2], j[3], iteraciones])
+                contiene = True
+                print(binToDec(j[1],a,b), binToDec(j[2],a,b),
+                      int(binToDec(j[3],0,t)), j[0])
+                break
+
+        if not contiene:
+            aEvaluar.append([binToDec(individuosx[i],a,b),
+                             binToDec(individuosy[i],a,b),
+                             int(binToDec(individuost[i],0,t)),
+                             individuosx[i],
+                             individuosy[i],
+                             individuost[i],
+                             iteraciones])
 
     p = multiprocessing.Pool(4)
-    evaluacion = p.map(eval, aEvaluar)
+    evaluacionNoRepetida = p.map(eval, aEvaluar)
+
+    evaluacion = evaluacionRepetida + evaluacionNoRepetida
 
     evaluacion.sort()
 

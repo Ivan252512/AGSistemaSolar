@@ -159,7 +159,7 @@ destino = Earth #Destino, se puede cambiar a cualquier planeta o Satélite.
 def f(vx,vy,inicio):
     global movBody, dt, Msol, Earth, destino, UAkm, Luna
 
-    tiempoLimite = 365*24*60 / 150 #Número máximo de iteraciones, 1 mes.
+    tiempoLimite = 365*24*60 / 36.5 #Número máximo de iteraciones, 1 mes.
     tiempo = 0
     tiempoEnOrbita = 0
 
