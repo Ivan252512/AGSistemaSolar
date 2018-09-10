@@ -14,7 +14,7 @@ dospi=2*pi
 pimedios=pi/2
 
 #Diferencial a usar
-dt=0.000000190781 # 6 seg
+dt=0.00000190781 # 1 min
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -193,12 +193,12 @@ Neptune.v = vector(vnep*cca, vnep*sca, 0)
 movBody = ([Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune])
 
-destino = Venus
+destino = Earth
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
-def f(vx,vy,iteraciones):
+def f(vx,vy,inicio):
     global movBody, dt
-    print(vx,vy,iteraciones)
+    print(vx,vy,inicio)
 
     #Herramientas de visual python para la visualización
     scene.width = 1400
@@ -231,7 +231,7 @@ def f(vx,vy,iteraciones):
         #Hacemos una lista con todas las distancias Nave-Destino.
         tiempo+=1
         contimp+=1
-        if(mag(Ship.pos-destino.pos)<=destino.radius*5):
+        if(mag(Ship.pos-destino.pos)<=destino.radius):
             break
 
 

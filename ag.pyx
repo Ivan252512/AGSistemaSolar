@@ -67,15 +67,15 @@ def poblacion(cantidad,bitsDeCadaIndividuo):
    apto, los reproduce y la descendencia remplaza al 50% menos apto"""
 
 def eval(x):
-    return [f(x[0],x[1],x[2]),x[3],x[4],x[2]]
+   return [f(x[0],x[1],x[2]),x[3],x[4],x[5],x[6]]
 
 resultado = []
 
 evaluaciones = []
-def evolucion(a,b,individuosx,individuosy,iteraciones):
+def evolucion(a,b,t,individuosx,individuosy,individuost,iteraciones):
     global evaluaciones, resultado
     print("---------------------------------------------------------")
-    if len(individuosx)!=len(individuosy):
+    if len(individuosx)!=len(individuosy)!=len(individuost):
         return "Las poblaciones iniciales deben tener la misma longitud."
     #Selección
 
@@ -84,19 +84,19 @@ def evolucion(a,b,individuosx,individuosy,iteraciones):
     for i in range(len(individuosx)):
         aEvaluar.append([binToDec(individuosx[i],a,b),
                          binToDec(individuosy[i],a,b),
-                         iteraciones,
+                         int(binToDec(individuost[i],0,t)),
                          individuosx[i],
-                         individuosy[i]])
+                         individuosy[i],
+                         individuost[i],
+                         iteraciones])
 
     p = multiprocessing.Pool(4)
     evaluacion = p.map(eval, aEvaluar)
 
-
     evaluacion.sort()
 
     for i in evaluacion:
-        resultado.append([i[0] + np.log10(np.sqrt(iteraciones + 1)),
-                          i[1],i[2],i[3]])
+        resultado.append(i)
 
     mejores50=evaluacion[:int(0.5*len(evaluacion))]
     #Reproducción
@@ -105,18 +105,24 @@ def evolucion(a,b,individuosx,individuosy,iteraciones):
 
 
     for i in range(len(mejores50)):
-        mejores50bin.append([mejores50[i][1],mejores50[i][2]])
+        mejores50bin.append([mejores50[i][1],mejores50[i][2],mejores50[i][3]])
         hijos.append([cruza(mejores50[random.randint(0,int(len(mejores50)/4)-1)][1],
                             mejores50[random.randint(0,int(len(mejores50)/4)-1)][1]),
                       cruza(mejores50[random.randint(0,int(len(mejores50)/4)-1)][2],
-                            mejores50[random.randint(0,int(len(mejores50)/4)-1)][2])])
+                            mejores50[random.randint(0,int(len(mejores50)/4)-1)][2]),
+                      cruza(mejores50[random.randint(0,int(len(mejores50)/4)-1)][3],
+                            mejores50[random.randint(0,int(len(mejores50)/4)-1)][3])])
 
     #Mutación, solo los hijos mutan.
     for i in range(int(len(hijos)/random.randint(1,4))):
         randx=random.randint(0,len(hijos)-1)
         hijos[randx][0]=mutacion(hijos[randx][0])
+
         randy=random.randint(0,len(hijos)-1)
         hijos[randy][1]=mutacion(hijos[randy][1])
+
+        randt=random.randint(0,len(hijos)-1)
+        hijos[randt][2]=mutacion(hijos[randt][2])
 
 
     #Junta a los padres y a los hijos
@@ -125,16 +131,18 @@ def evolucion(a,b,individuosx,individuosy,iteraciones):
                      hijos)
     genx=[]
     geny=[]
+    gent=[]
     for i in range(len(nuevaGeneracion)):
         genx.append(nuevaGeneracion[i][0])
         geny.append(nuevaGeneracion[i][1])
+        gent.append(nuevaGeneracion[i][2])
 
     if(iteraciones==0):
         resultado.sort()
         decimales=[]
         for i in resultado:
             decimales.append([binToDec(i[1],a,b),binToDec(i[2],a,b),
-                              i[3],i[0]])
+                              int(binToDec(i[3],0,t)),i[0],i[4]])
         return decimales
     else:
-        return  evolucion(a,b,genx,geny,iteraciones-1)
+        return  evolucion(a,b,t,genx,geny,gent,iteraciones-1)
