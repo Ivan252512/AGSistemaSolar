@@ -213,7 +213,7 @@ def f(vx,vy,inicio):
     #conveniencia, para lograr que las trayectorias se encaminen al destino.
 
     #cambiamos la posición inicial de la nave a la actual de la Tierra.
-    Ship = sphere(pos=Earth.pos+vector(0,Earth.radius*2,0),
+    Ship = sphere(pos=Earth.pos+vector(0,Earth.radius,0),
                   radius=0.0001/UAkm,
                   color=color.orange,make_trail=True, interval=10)
     Ship.mass = 546700/Msol

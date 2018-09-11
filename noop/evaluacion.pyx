@@ -34,7 +34,6 @@ for i in trayectorias:
         cont=0
     cont+=1
 
-print(trayectoriasSeparadas)
 
 #Evaluamos cada trayectoria:
 for i in trayectoriasSeparadas:

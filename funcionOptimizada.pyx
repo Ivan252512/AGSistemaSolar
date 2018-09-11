@@ -153,19 +153,19 @@ Neptune = cc.celestialBody(mnep, 24622/UAkm, np.array([rnep*ca,rnep*sa,0]),
 movBody = [Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune]
 
-destino = Earth #Destino, se puede cambiar a cualquier planeta o Satélite.
+destino = Mars #Destino, se puede cambiar a cualquier planeta o Satélite.
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
 def f(vx,vy,inicio):
     global movBody, dt, Msol, Earth, destino, UAkm, Luna
 
-    tiempoLimite = 365*24*60 / 36.5 #Número máximo de iteraciones, 1 mes.
+    tiempoLimite = 365*24*60 / 2 #Número máximo de iteraciones, 15 días.
     tiempo = 0
     tiempoEnOrbita = 0
 
     #Condición de penalización para que la rapidez de la nave no supere el
     #límite impuesto.
-    if not (40320/UAkm)*(24*365)<np.sqrt(vx**2+vy**2)<(70000/UAkm)*(24*365):
+    if not (40320/UAkm)*(24*365)<np.sqrt(vx**2+vy**2)<(60000/UAkm)*(24*365):
         #Imprime los valores a evaluar y su resultado.
         print(vx,vy,inicio,100)
         return 100
