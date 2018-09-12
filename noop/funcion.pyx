@@ -14,7 +14,7 @@ dospi=2*pi
 pimedios=pi/2
 
 #Diferencial a usar
-dt=0.00000190781 # 1 min
+dt=0.000190781 # 100 min
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -193,12 +193,13 @@ Neptune.v = vector(vnep*cca, vnep*sca, 0)
 movBody = ([Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune])
 
-destino = Luna
+destino = Jupyter
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
 def f(vx,vy,inicio):
     global movBody, dt
     print(vx,vy,inicio)
+
 
     #Herramientas de visual python para la visualización
     scene.width = 1400
@@ -226,7 +227,7 @@ def f(vx,vy,inicio):
             movBody.append(Ship)
             ccel.append(Ship)
         if tiempo>=inicio:
-           scene.center = Ship.pos
+           scene.center = Earth.pos
         else:
            scene.center = Earth.pos
         #Función para mover todos los cuerpos
@@ -237,9 +238,6 @@ def f(vx,vy,inicio):
         #Hacemos una lista con todas las distancias Nave-Destino.
         tiempo+=1
         contimp+=1
-
-        if(tiempo > inicio and mag(Ship.pos-destino.pos)<=destino.radius):
-            break
 
 
 """Mover cuerpos"""

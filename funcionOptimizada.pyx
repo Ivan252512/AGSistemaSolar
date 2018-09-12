@@ -17,7 +17,7 @@ scat = np.sin(ANG+7*np.pi/8)
 ccat = np.cos(ANG+7*np.pi/8)
 
 #Diferencial a usar
-dt=0.00000190781 # 1 min
+dt=0.000190781 # 100 min
 
 """Mercurio"""
 rmerc=0.38          #radio
@@ -153,13 +153,13 @@ Neptune = cc.celestialBody(mnep, 24622/UAkm, np.array([rnep*ca,rnep*sa,0]),
 movBody = [Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune]
 
-destino = Luna #Destino, se puede cambiar a cualquier planeta o Satélite.
+destino = Jupyter #Destino, se puede cambiar a cualquier planeta o Satélite.
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
 def f(vx,vy,inicio):
     global movBody, dt, Msol, Earth, destino, UAkm, Luna
 
-    tiempoLimite = 365*24*60 / 12 #Número máximo de iteraciones, 1 mes.
+    tiempoLimite = 365*24*6  #Número máximo de iteraciones, 10 años.
     tiempo = 0
     tiempoEnOrbita = 0
 
