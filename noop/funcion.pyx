@@ -193,7 +193,7 @@ Neptune.v = vector(vnep*cca, vnep*sca, 0)
 movBody = ([Sun,Mercury,Venus,Luna,Earth,Mars,Io,Europa,Ganimedes,
               Calisto,Jupyter,Titan,Saturn,Uranus,Neptune])
 
-destino = Earth
+destino = Luna
 
 """Es la función principal, descripción en el archivo .pdf adjunto"""
 def f(vx,vy,inicio):
@@ -211,18 +211,24 @@ def f(vx,vy,inicio):
     ccel = [Sun,Mercury,Venus,Earth,Mars,Jupyter,Saturn,Uranus,Neptune]
     #Primer distancia Nave-destino, se usa abajo, se le resta un poco a
     #conveniencia, para lograr que las trayectorias se encaminen al destino.
-
-    #cambiamos la posición inicial de la nave a la actual de la Tierra.
-    Ship = sphere(pos=Earth.pos+vector(0,Earth.radius*2,0),
-                  radius=0.0001/UAkm,
-                  color=color.orange,make_trail=True, interval=10)
-    Ship.mass = 546700/Msol
-    Ship.v = Earth.v + vector(vx, vy, 0.0)
-    movBody.append(Ship)
-    ccel.append(Ship)
-
     while True:
-        scene.center = Ship.pos
+        #Rapidez a la que se quiere visualizar cada iteración, no necesario.
+        #Tiempo inicial del viaje de la nave, es decir, la nave puede iniciar
+        #su trayectoria mucho después de que se inicie la simulación.
+        #Movemos cada uno de los cuerpos en el sistema.
+        if tiempo==inicio:
+            #cambiamos la posición inicial de la nave a la actual de la Tierra.
+            Ship = sphere(pos=Earth.pos+vector(0,Earth.radius,0),
+                          radius=0.1/UAkm,
+                          color=color.orange,make_trail=True, interval=10)
+            Ship.mass = 546700/Msol
+            Ship.v = Earth.v + vector(vx, vy, 0.0)
+            movBody.append(Ship)
+            ccel.append(Ship)
+        if tiempo>=inicio:
+           scene.center = Ship.pos
+        else:
+           scene.center = Earth.pos
         #Función para mover todos los cuerpos
         computeForces(movBody)
         if contimp==1000:
@@ -231,7 +237,8 @@ def f(vx,vy,inicio):
         #Hacemos una lista con todas las distancias Nave-Destino.
         tiempo+=1
         contimp+=1
-        if(mag(Ship.pos-destino.pos)<=destino.radius):
+
+        if(tiempo > inicio and mag(Ship.pos-destino.pos)<=destino.radius):
             break
 
 

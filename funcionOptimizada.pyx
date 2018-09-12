@@ -165,7 +165,7 @@ def f(vx,vy,inicio):
 
     #Condición de penalización para que la rapidez de la nave no supere el
     #límite impuesto.
-    if not (40320/UAkm)*(24*365)<np.sqrt(vx**2+vy**2)<(70000/UAkm)*(24*365):
+    if not (40320/UAkm)*(24*365)<np.sqrt(vx**2+vy**2)<(60000/UAkm)*(24*365):
         #Imprime los valores a evaluar y su resultado.
         print(vx,vy,inicio,100)
         return 100

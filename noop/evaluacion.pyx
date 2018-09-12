@@ -13,7 +13,7 @@ from funcion import f
 """Evaluación para las mejores trayectorias en el .txt"""
 
 #Cargamos desde el archivo txt
-file=open('TierraF.txt', 'r')
+file=open('Luna.txt', 'r')
 trayectorias=[]
 linea=''
 for i in file.read():
@@ -34,7 +34,6 @@ for i in trayectorias:
         cont=0
     cont+=1
 
-print(trayectoriasSeparadas)
 
 #Evaluamos cada trayectoria:
 for i in trayectoriasSeparadas:
