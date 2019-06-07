@@ -1,0 +1,6 @@
+jupyter
+vpnotebook
+numpy
+ipykernel
+autobahn>=18.8.2
+autobahn
